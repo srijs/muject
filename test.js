@@ -92,4 +92,19 @@ describe('Dependency Injection', function () {
     assert.equal(ret, 'foo_');
   });
 
+  it('injects nested dependency, export-style', function () {
+    var called = false;
+    inject.bar = 'foo';
+    inject.baz = inject(function (bar) {
+      this.baz = bar + '_';
+    }, ['bar']);
+    var ret = inject(function (baz) {
+      called = true;
+      assert.equal(arguments.length, 1);
+      return baz.baz;
+    }, ['baz']);
+    assert(called);
+    assert.equal(ret, 'foo_');
+  });
+
 });
