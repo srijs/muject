@@ -4,7 +4,8 @@
   "description": "10-SLOC no-bullshit dependency injection micro-library",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "./node_modules/.bin/uglifyjs index.js -m > index.min.js"
   },
   "keywords": [
     "dependency",
@@ -15,7 +16,9 @@
   "author": "Sam Rijs",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^1.21.4"
+    "mocha": "^1.21.4",
+    "uglify-js": "^2.4.15",
+    "uglifyjs": "^2.3.6"
   },
   "dependencies": {},
   "repository": {
