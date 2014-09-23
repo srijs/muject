@@ -32,4 +32,7 @@ inject.baz = inject(function (bar) {  // direct, register w/ injection
 }, ['bar']);
 
 var myModule = inject('./my/module.js');
+
+myModule.exportA();
+myModule.exportB();
 ```
