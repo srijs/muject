@@ -2,6 +2,8 @@
 
 _10-SLOC no-bullshit dependency injection micro-library_
 
+[![NPM](https://nodei.co/npm/muject.png?compact=true)](https://nodei.co/npm/muject/)
+
 ## Usage
 
 ### Create a new injector
@@ -25,7 +27,7 @@ module.exports.inject = ['foo', 'bar', 'baz'];
 ```
 inject.foo = inject('./my/foo'); // require, register w/ injection
 
-inject.bar = require('./my/bar); // require, register w/o injection
+inject.bar = require('./my/bar'); // require, register w/o injection
 
 inject.baz = inject(function (bar) {  // direct, register w/ injection
   return bar.doSomething();
