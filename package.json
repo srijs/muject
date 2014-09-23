@@ -11,7 +11,10 @@
     "dependency",
     "injection",
     "inversion",
-    "control"
+    "control",
+    "ioc",
+    "di",
+    "require"
   ],
   "author": "Sam Rijs",
   "license": "MIT",
