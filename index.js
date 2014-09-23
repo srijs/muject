@@ -4,14 +4,12 @@ module.exports = function (require) {
 
     exports = {};
 
-    try { module = require(module); } finally {
+    if (module === '' + module) module = require(module);
 
-      return (deps = deps || module.inject) ?
-      module.apply(exports, deps.map(function (dep) {
-        return inject[dep];
-      })) || exports : module;
-
-    }
+    return (deps = deps || module.inject) ?
+    module.apply(exports, deps.map(function (dep) {
+      return inject[dep];
+    })) || exports : module;
 
   };
 
