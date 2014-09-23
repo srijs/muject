@@ -1,0 +1,29 @@
+{
+  "name": "muject",
+  "version": "1.0.1",
+  "description": "10-SLOC no-bullshit dependency injection micro-library",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "dependency",
+    "injection",
+    "inversion",
+    "control"
+  ],
+  "author": "Sam Rijs",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^1.21.4"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:srijs/muject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/srijs/muject/issues"
+  },
+  "homepage": "https://github.com/srijs/muject"
+}
