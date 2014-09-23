@@ -1,8 +1,8 @@
 module.exports = function (require) {
 
-  return function inject (module, deps) {
+  return function inject (module, deps, exports) {
 
-    var exports = {};
+    exports = {};
 
     try { module = require(module); } finally {
 
