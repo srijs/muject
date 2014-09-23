@@ -10,6 +10,18 @@ describe('Dependency Injection', function () {
     inject = muject(require);
   });
 
+  it('skips module w/o inject', function () {
+    var called = false;
+    var module = function () {
+      called = true;
+      assert.equal(arguments.length, 0);
+      return 'foo';
+    };
+    var ret = inject(module);
+    assert(!called);
+    assert.equal(ret, module);
+  });
+
   it('injects zero dependencies, require-style', function () {
     var called = false;
     var module = function () {
