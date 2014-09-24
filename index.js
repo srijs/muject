@@ -1,14 +1,10 @@
-module.exports = function (require) {
+module.exports = function inject (module, deps) {
 
-  return function inject (module, deps) {
+  module = module.apply ? module : this(module);
 
-    module = module.apply ? module : require(module);
-
-    return (deps = deps || module.inject) ?
-    module.apply(module = {}, deps.map(function (dep) {
-      return inject[dep];
-    })) || module : module;
-
-  };
+  return (deps = deps || module.inject) ?
+  module.apply(module = {}, deps.map(function (dep) {
+    return inject[dep];
+  })) || module : module;
 
 };

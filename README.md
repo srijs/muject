@@ -9,7 +9,7 @@ _10-SLOC no-bullshit dependency injection micro-library_
 ### Create a new injector
 
 ```
-var inject = require('muject')(require);
+var inject = require('muject').bind(require);
 ```
 
 ### Require dependencies inside a module
