@@ -1,4 +1,4 @@
-module.exports = function inject (module, deps) {
+module.exports = function (modules, module, deps) {
 
   // If the provided module is not a function
   // (or, in behaviour terms, can't be applied),
@@ -14,7 +14,7 @@ module.exports = function inject (module, deps) {
   // ...we apply the module to a exports object (`{}`)
   // and the list of resolved dependencies.
   module.apply(module = {}, deps.map(function (dep) {
-    return inject[dep];
+    return modules[dep];
   }))
   // If the function application does not return a
   // truthy value, we return the exports object instead.

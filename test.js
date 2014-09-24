@@ -5,7 +5,7 @@ var muject = require('./index');
 describe('Dependency Injection', function () {
 
   it('skips module w/o inject', function () {
-    var inject = muject;
+    var inject = muject.bind(null, {});
     var called = false;
     var module = function () {
       called = true;
@@ -27,7 +27,7 @@ describe('Dependency Injection', function () {
     var inject = muject.bind(function (name) {
       required = name;
       return module;
-    });
+    }, {});
     var ret = inject('hello');
     assert(!called);
     assert.equal(required, 'hello');
@@ -35,7 +35,7 @@ describe('Dependency Injection', function () {
   });
 
   it('injects zero dependencies, value-style', function () {
-    var inject = muject;
+    var inject = muject.bind(null, {});
     var called = false;
     var module = function () {
       called = true;
@@ -59,7 +59,7 @@ describe('Dependency Injection', function () {
     var inject = muject.bind(function (name) {
       required = name;
       return module;
-    });
+    }, {});
     var ret = inject('hello');
     assert(called);
     assert.equal(required, 'hello');
@@ -67,7 +67,7 @@ describe('Dependency Injection', function () {
   });
 
   it('injects zero dependencies, literal-style', function () {
-    var inject = muject;
+    var inject = muject.bind(null, {});
     var called = false;
     var ret = inject(function () {
       called = true;
@@ -79,9 +79,9 @@ describe('Dependency Injection', function () {
   });
 
   it('injects simple dependency, value-style', function () {
-    var inject = muject;
+    var modules = {}, inject = muject.bind(null, modules);
     var called = false;
-    inject.bar = 'foo';
+    modules.bar = 'foo';
     var module = function (bar) {
       called = true;
       assert.equal(arguments.length, 1);
@@ -97,15 +97,15 @@ describe('Dependency Injection', function () {
     var called = false, required = false;
     var module = function (bar) {
       called = true;
-      assert.equal(arguments.length, 1);
+      assert.equal(bar, 'foo');
       return bar;
     };
     module.inject = ['bar'];
-    var inject = muject.bind(function (name) {
+    var modules = {}, inject = muject.bind(function (name) {
       required = name;
       return module;
-    });
-    inject.bar = 'foo';
+    }, modules);
+    modules.bar = 'foo';
     var ret = inject('hello');
     assert(called);
     assert.equal(required, 'hello');
@@ -113,9 +113,9 @@ describe('Dependency Injection', function () {
   });
 
   it('injects simple dependency, literal-style', function () {
-    var inject = muject;
+    var modules = {}, inject = muject.bind(null, modules);
     var called = false;
-    inject.bar = 'foo';
+    modules.bar = 'foo';
     var ret = inject(function (bar) {
       called = true;
       assert.equal(arguments.length, 1);
@@ -126,10 +126,10 @@ describe('Dependency Injection', function () {
   });
 
   it('injects nested dependency, value-style', function () {
-    var inject = muject;
+    var modules = {}, inject = muject.bind(null, modules);
     var called = false;
-    inject.bar = 'foo';
-    inject.baz = inject(function (bar) {
+    modules.bar = 'foo';
+    modules.baz = inject(function (bar) {
       return bar + '_';
     }, ['bar']);
     var module = function (baz) {
@@ -151,12 +151,12 @@ describe('Dependency Injection', function () {
       return baz;
     };
     module.inject = ['baz'];
-    var inject = muject.bind(function (name) {
+    var modules = {}, inject = muject.bind(function (name) {
       required = name;
       return module;
-    });
-    inject.bar = 'foo';
-    inject.baz = inject(function (bar) {
+    }, modules);
+    modules.bar = 'foo';
+    modules.baz = inject(function (bar) {
       return bar + '_';
     }, ['bar']);
     var ret = inject('hello');
@@ -166,10 +166,10 @@ describe('Dependency Injection', function () {
   });
 
   it('injects nested dependency, literal-style', function () {
-    var inject = muject;
+    var modules = {}, inject = muject.bind(null, modules);
     var called = false;
-    inject.bar = 'foo';
-    inject.baz = inject(function (bar) {
+    modules.bar = 'foo';
+    modules.baz = inject(function (bar) {
       return bar + '_';
     }, ['bar']);
     var ret = inject(function (baz) {
@@ -182,10 +182,10 @@ describe('Dependency Injection', function () {
   });
 
   it('injects nested dependency, export-style', function () {
-    var inject = muject;
+    var modules = {}, inject = muject.bind(null, modules);
     var called = false;
-    inject.bar = 'foo';
-    inject.baz = inject(function (bar) {
+    modules.bar = 'foo';
+    modules.baz = inject(function (bar) {
       this.baz = bar + '_';
     }, ['bar']);
     var ret = inject(function (baz) {

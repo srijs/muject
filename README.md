@@ -9,7 +9,8 @@ _10 sloc, ⅛ kb, no-bullshit dependency injection micro-library_
 ### Create a new injector
 
 ```
-var inject = require('muject').bind(require);
+var modules = {},
+    inject = require('muject').bind(require, modules);
 ```
 
 ### Require dependencies inside a module
@@ -25,11 +26,11 @@ module.exports.inject = ['foo', 'bar', 'baz'];
 ### Register dependencies & require a module
 
 ```
-inject.foo = inject('./my/foo'); // require, register w/ injection
+modules.foo = inject('./my/foo'); // require, register w/ injection
 
-inject.bar = require('./my/bar'); // require, register w/o injection
+modules.bar = require('./my/bar'); // require, register w/o injection
 
-inject.baz = inject(function (bar) {  // direct, register w/ injection
+modules.baz = inject(function (bar) {  // direct, register w/ injection
   return bar.doSomething();
 }, ['bar']);
 
