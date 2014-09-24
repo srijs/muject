@@ -1,6 +1,6 @@
 # µject
 
-_10-SLOC no-bullshit dependency injection micro-library_
+_10 sloc, ⅛ kb, no-bullshit dependency injection micro-library_
 
 [![NPM](https://nodei.co/npm/muject.png?compact=true)](https://nodei.co/npm/muject/)
 
